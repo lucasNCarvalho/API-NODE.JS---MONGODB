@@ -5,7 +5,7 @@ const Person = require("../models/Person");
 //create
 router.post('/', async (req, res) => {
 
-    const {name, salary, approved} = req.body;
+    const {id, name, date, email} = req.body;
 
     if(!name) {
         res.status(422).json({error: 'O nome é obrigatório!'})
@@ -13,9 +13,10 @@ router.post('/', async (req, res) => {
     }
 
     const person = {
+        id,
         name,
-        salary,
-        approved
+        date,
+        email
     }
 
 

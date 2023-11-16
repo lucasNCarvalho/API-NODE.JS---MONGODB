@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
 
 const Person = mongoose.model('Person', {
+    id: String,
     name: String,
-    salary: Number,
-    aprroved: Boolean,
+    date: String,
+    email: String
 });
 
 module.exports = Person
