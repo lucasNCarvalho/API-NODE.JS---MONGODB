@@ -75,7 +75,7 @@ router.put('/:id', async (req, res) => {
 
 
     try {
-        const updatedPerson = await Person.findOneAndUpdate({user_cpf: key}, person);
+        const updatedPerson = await Person.updateOne({user_cpf: key}, person);
         res.status(200).json(updatedPerson);
     } catch (error) {
         res.status(500).json({error: error})
