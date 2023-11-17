@@ -5,20 +5,19 @@ const Person = require("../models/Person");
 //create
 router.post('/', async (req, res) => {
 
-    const {id, name, date, email} = req.body;
+    const {user_id, user_name, user_date, user_email} = req.body;
 
-    if(!name) {
+    if(!user_name) {
         res.status(422).json({error: 'O nome é obrigatório!'})
         return
     }
 
     const person = {
-        id,
-        name,
-        date,
-        email
+        user_id,
+        user_name,
+        user_date,
+        user_email,
     }
-
 
     try {  
         await Person.create(person);
@@ -65,13 +64,13 @@ router.get('/:id', async (req, res) => {
 router.put('/:id', async (req, res) => {
     const key = req.params.id;
 
-    const {id, name, date, email} = req.body;
+    const {user_id, user_name, user_date, user_email} = req.body;
 
     const person = {
-        id,
-        name,
-        date,
-        email
+        user_id,
+        user_name,
+        user_date,
+        user_email,
     }
 
 
