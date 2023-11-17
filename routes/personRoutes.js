@@ -5,7 +5,7 @@ const Person = require("../models/Person");
 //create
 router.post('/', async (req, res) => {
 
-    const {user_id, user_name, user_date, user_email} = req.body;
+    const { user_cpf, user_name, user_date, user_email} = req.body;
 
     if(!user_name) {
         res.status(422).json({error: 'O nome é obrigatório!'})
@@ -13,7 +13,7 @@ router.post('/', async (req, res) => {
     }
 
     const person = {
-        user_id,
+        user_cpf,
         user_name,
         user_date,
         user_email,
@@ -45,7 +45,7 @@ router.get('/:id', async (req, res) => {
     const id = req.params.id
 
     try {
-        const person = await Person.findOne({_id: id});
+        const person = await Person.findOne({user_cpf: id});
 
         if(!person) {
             res.status(424).json({message: 'Usuário não encontrado!'});
@@ -64,10 +64,10 @@ router.get('/:id', async (req, res) => {
 router.put('/:id', async (req, res) => {
     const key = req.params.id;
 
-    const {user_id, user_name, user_date, user_email} = req.body;
+    const { user_cpf, user_name, user_date, user_email} = req.body;
 
     const person = {
-        user_id,
+        user_cpf,
         user_name,
         user_date,
         user_email,
@@ -75,7 +75,7 @@ router.put('/:id', async (req, res) => {
 
 
     try {
-        const updatedPerson = await Person.findOneAndUpdate({_id: key}, person);
+        const updatedPerson = await Person.findOneAndUpdate({user_cpf: key}, person);
         res.status(200).json(updatedPerson);
     } catch (error) {
         res.status(500).json({error: error})
@@ -88,7 +88,7 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
     const id = req.params.id
   
-    const person = await Person.findOne({ _id: id })
+    const person = await Person.findOne({ user_cpf: id })
   
     if (!person) {
       res.status(422).json({ message: 'Usuário não encontrado!' })
@@ -96,7 +96,7 @@ router.delete('/:id', async (req, res) => {
     }
   
     try {
-      await Person.deleteOne({ _id: id })
+      await Person.deleteOne({ user_cpf: id })
   
       res.status(200).json({ message: 'Usuário removido com sucesso!' })
     } catch (error) {
