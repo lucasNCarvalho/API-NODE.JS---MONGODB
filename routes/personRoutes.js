@@ -63,18 +63,20 @@ router.get('/:id', async (req, res) => {
 
 //update by id
 router.put('/:id', async (req, res) => {
-    const id = req.params.id;
+    const key = req.params.id;
 
-    const {name, salary, approved} = req.body;
+    const {id, name, date, email} = req.body;
 
-    const person={
+    const person = {
+        id,
         name,
-        salary,
-        approved
+        date,
+        email
     }
 
+
     try {
-        const updatedPerson = await Person.findOneAndUpdate({_id: id}, person);
+        const updatedPerson = await Person.findOneAndUpdate({_id: key}, person);
         res.status(200).json(updatedPerson);
     } catch (error) {
         res.status(500).json({error: error})
